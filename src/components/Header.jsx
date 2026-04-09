@@ -14,7 +14,6 @@ export default function Header() {
           <button className="rounded-full border px-5 py-2 font-[Stolzl] text-[#FFD29D] cursor-pointer transition delay-50 duration-200  hover:bg-[#FFD29D] hover:text-[#FF4848]">
             Sign in
           </button>
-          <button className="rounded-full border px-5 py-2 font-[Stolzl] bg-[#FFD29D] text-[#FF4848] cursor-pointer transition delay-50 duration-200 hover:text-[#FFD29D] hover:bg-[#F85E00]">Sign up</button>
         </div>
       </nav>
     </>
