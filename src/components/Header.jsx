@@ -9,7 +9,7 @@ export default function Header() {
           <NavLink to="/favorites">Favorites</NavLink>
           <NavLink to="/planner">Planner</NavLink>
         </div>
-        <img src="src/assets/pics/logo.png" alt="Reciply logo" />
+        <img src="/logo.png" alt="Reciply logo" />
         <div className="flex space-x-4">
           <button className="rounded-full border px-5 py-2 font-[Stolzl] text-[#FFD29D] cursor-pointer transition delay-50 duration-200  hover:bg-[#FFD29D] hover:text-[#FF4848]">
             Sign in
