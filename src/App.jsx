@@ -1,22 +1,37 @@
-import { useState } from 'react'
-import { Route, Routes, BrowserRouter } from 'react-router'
-import './App.css'
-import Layout from './components/Layout'
-import Home from './pages/Home'
-import RecipeDtail from './pages/RecipeDetail'
-
+import { useState } from "react";
+import { Route, Routes, BrowserRouter } from "react-router";
+import "./App.css";
+import Layout from "./components/Layout";
+import Home from "./pages/Home";
+import RecipeDtail from "./pages/RecipeDetail";
+import Login from "./pages/Login";
+import Register from "./pages/Register";
+import ShoppingList from "./pages/ShoppingList";
+import Favorites from "./pages/Favorites";
+import MealPlanner from "./pages/MealPlanner";
+import { AuthProvider } from "./context/AuthContext";
+import { ProtectedRoute } from "./components/ProtectedRoute";
 
 function App() {
   return (
     <BrowserRouter>
-    <Routes>
-      <Route element={<Layout/>}>
-      <Route index element={<Home/>}/>
-      <Route path="/recipe/:id" element={<RecipeDtail/>}/>
-      </Route>
-    </Routes>
+      <AuthProvider>
+        <Routes>
+          <Route element={<Layout />}>
+            <Route index element={<Home />} />
+            <Route path="/recipe/:id" element={<RecipeDtail />} />
+            <Route element={<ProtectedRoute />}>
+              <Route path="/favorites" element={<Favorites />} />
+              <Route path="/planner" element={<MealPlanner />} />
+              <Route path="/list" element={<ShoppingList />} />
+            </Route>
+          </Route>
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
+        </Routes>
+      </AuthProvider>
     </BrowserRouter>
-  )
+  );
 }
 
-export default App
+export default App;
