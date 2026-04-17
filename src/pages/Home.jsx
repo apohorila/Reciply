@@ -1,11 +1,14 @@
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router";
 import { getPopularRecipes } from "../api/api";
 import PopularDish from "../components/PopularDish";
 import CuisineCard from "../components/CuisineCard";
 
 export default function Home() {
+  const navigate = useNavigate();
   const [popularRecipes, setPopularRecipes] = useState(null);
   const [recipeIndex, setRecipeIndex] = useState(0);
+  const [inputResult, setInputResult] = useState("");
 
   const cuisineData = [
     {
@@ -54,13 +57,31 @@ export default function Home() {
               </h1>
               <h2>Search by ingredient, cuisine, or dish name</h2>
             </div>
-            <div className="flex max-w-xl space-x-4 font-[Stolzl]">
+            <div className="flex w-full justify-center space-x-4 font-[Stolzl]">
               <input
                 type="text"
-                placeholder="Enter your ingredients..."
-                className="text[#F85E00] w-3xl rounded-4xl border border-amber-700 bg-[#FFD29D] px-5 py-2"
+                placeholder="Enter ingredients separated by commas (e.g. chicken, garlic, salt)"
+                className="text[#F85E00] w-2xl rounded-4xl border border-amber-700 bg-[#FFD29D] px-5 py-2"
+                value={inputResult}
+                onChange={(e) => {
+                  setInputResult(e.target.value);
+                }}
               />
-              <button className="cursor-pointer rounded-4xl bg-[#F85E00] px-3 text-amber-50">
+              <button
+                className="cursor-pointer rounded-4xl bg-[#F85E00] px-3 text-amber-50"
+                onClick={() => {
+                  const formattedIngredients = inputResult
+                    .split(",")
+                    .map((ingredient) =>
+                      ingredient.trim().toLowerCase().replace(/\s+/g, "_"),
+                    )
+                    .filter(Boolean);
+                  navigate("/search", {
+                    state: { ingredients: formattedIngredients },
+                  });
+                  setInputResult("")
+                }}
+              >
                 Search
               </button>
             </div>
@@ -88,8 +109,8 @@ export default function Home() {
                 })}
           </div>
         </section>
-        <section className="font-[Stolzl] bg-[#FFD29D] text-amber-900 py-20 px-28 flex-col space-y-20">
-          <div className="text-center flex-col space-y-4">
+        <section className="flex-col space-y-20 bg-[#FFD29D] px-28 py-20 font-[Stolzl] text-amber-900">
+          <div className="flex-col space-y-4 text-center">
             <p>Explore</p>
             <h1 className="text-5xl">Cook by the world's flavors</h1>
             <p>
@@ -98,8 +119,14 @@ export default function Home() {
             </p>
           </div>
           <div className="flex justify-between">
-            {cuisineData.map(cuisine =>{
-              return <CuisineCard title={cuisine.title} img={cuisine.img} description={cuisine.description}/>
+            {cuisineData.map((cuisine) => {
+              return (
+                <CuisineCard
+                  title={cuisine.title}
+                  img={cuisine.img}
+                  description={cuisine.description}
+                />
+              );
             })}
           </div>
         </section>

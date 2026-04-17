@@ -31,11 +31,11 @@ export default function Login() {
     setError("");
     setEmailError("");
     if (!isValidEmail(email)) {
-      setEmailError("Неправильний формат електронної пошти");
+      setEmailError("Incorrect email format.");
       return;
     }
     if (!password) {
-      setError("Введіть пароль");
+      setError("Enter password");
       return;
     }
 
@@ -44,14 +44,14 @@ export default function Login() {
       await login(email, password);
       navigate("/");
     } catch (err) {
-      setError("Неправильна електронна пошта або пароль");
+      setError("Incorrect email or password.");
     } finally {
       setIsSubmitting(false);
     }
   };
   return (
     <main className="flex h-screen items-center bg-[#FFD29D] p-20">
-      <div className="mx-auto flex w-fit flex-col items-center space-y-5 rounded-4xl border bg-[#F85E00] px-10 py-15 font-[Stolzl] text-white">
+      <div className="mx-auto flex w-fit flex-col items-center space-y-5 rounded-4xl border bg-[#F85E00] px-10 py-15 pt-5 font-[Stolzl] text-white">
         <img src="logo.png" className="h-17.5 w-28.5" />
         <div className="text-center">
           <h1 className="text-4xl">Welcome back 👋</h1>

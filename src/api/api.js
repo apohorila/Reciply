@@ -17,3 +17,15 @@ export async function getRecipeById(id) {
   const data = await res.json();
   return data;
 }
+
+export async function getRecipeByIngredient(ingredient){
+  const res = await fetch(`https://www.themealdb.com/api/json/v1/1/filter.php?i=${ingredient}`)
+  if (!res.ok) {
+    throw new Error("Couldn't fetch the recipe");
+  }
+  const data = await res.json();
+  if (!data.meals){
+    return []
+  }
+  return data.meals;
+}

@@ -9,6 +9,7 @@ import Register from "./pages/Register";
 import ShoppingList from "./pages/ShoppingList";
 import Favorites from "./pages/Favorites";
 import MealPlanner from "./pages/MealPlanner";
+import SearchResults from "./pages/SearchResults";
 import { AuthProvider } from "./context/AuthContext";
 import { ProtectedRoute } from "./components/ProtectedRoute";
 
@@ -25,7 +26,9 @@ function App() {
               <Route path="/planner" element={<MealPlanner />} />
               <Route path="/list" element={<ShoppingList />} />
             </Route>
+            <Route path="/search" element={<SearchResults/>}/>
           </Route>
+          
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
         </Routes>
