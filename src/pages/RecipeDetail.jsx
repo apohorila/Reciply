@@ -1,12 +1,16 @@
 import { useState, useEffect } from "react";
 import { useParams } from "react-router";
 import { getRecipeById } from "../api/api";
+import { useAuth } from "../context/AuthContext";
 import getIngredients from "../utils/utils";
 import CategoryLabel from "../components/CategoryLabel";
+import FavoriteButton from "../components/FavoriteButton";
 
 export default function RecipeDtail() {
   const { id } = useParams();
+  const { currentUser } = useAuth();
   const [recipeDetail, setRecipeDetail] = useState({});
+  const [isFavorite, setIsFavorite] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   useEffect(() => {
@@ -25,8 +29,8 @@ export default function RecipeDtail() {
     fetchRecipe();
   }, [id]);
   useEffect(() => {
-  window.scrollTo(0, 0)
-}, [id])
+    window.scrollTo(0, 0);
+  }, [id]);
   const ingredients = getIngredients(recipeDetail);
   const recipeSteps = recipeDetail.strInstructions?.split("\r\n");
   return (
@@ -41,12 +45,15 @@ export default function RecipeDtail() {
               <CategoryLabel label={recipeDetail.strArea} />
               <CategoryLabel label={recipeDetail.strCategory} />
             </div>
-            <h1 className="z-1 text-5xl text-white">{recipeDetail.strMeal}</h1>
+            <div className="z-1 flex justify-between">
+              <h1 className="text-5xl text-white">{recipeDetail.strMeal}</h1>
+              <FavoriteButton userId={currentUser?.uid} meal={recipeDetail} />
+            </div>
             <div className="absolute inset-0 bg-linear-to-t from-black/70 to-transparent"></div>
           </div>
         </section>
         <section className="grid grid-cols-2 bg-[#FFD29D] p-20 font-[Stolzl]">
-          <div className="flex w-fit h-fit flex-col rounded-4xl border-0 bg-white p-8">
+          <div className="flex h-fit w-fit flex-col rounded-4xl border-0 bg-white p-8">
             <h2 className="text-3xl">Ingredients list</h2>
             <hr className="mt-4 text-amber-700"></hr>
             <div className="mt-4 flex flex-col space-y-4">
@@ -66,17 +73,17 @@ export default function RecipeDtail() {
             </div>
           </div>
 
-          <div className="flex flex-col space-y-5 items-center">
+          <div className="flex flex-col items-center space-y-5">
             <div className="rounded-4xl bg-white p-8">
               <h2 className="text-3xl">Instructions</h2>
               <hr className="mt-4 text-amber-700"></hr>
               <div className="mt-5 space-y-2 text-xl">
                 {recipeSteps?.map((step) => {
-                  return <p>{step}</p>;
+                  return <p key={step}>{step}</p>;
                 })}
               </div>
             </div>
-            <div className="flex justify-center space-x-3 rounded-3xl bg-[#F85E00] p-8 w-fit">
+            <div className="flex w-fit justify-center space-x-3 rounded-3xl bg-[#F85E00] p-8">
               {recipeDetail.strSource && (
                 <a
                   href={`${recipeDetail.strSource}`}
@@ -102,7 +109,7 @@ export default function RecipeDtail() {
               {recipeDetail.strYoutube && (
                 <a
                   href={`${recipeDetail.strYoutube}`}
-                  className="flex rounded-4xl bg-[#FFD29D] px-4 py-2 text-xl text-black items-center"
+                  className="flex items-center rounded-4xl bg-[#FFD29D] px-4 py-2 text-xl text-black"
                 >
                   {" "}
                   <svg
