@@ -8,7 +8,7 @@ export default function Header() {
     <>
       <nav className="flex h-18 w-full items-center justify-between bg-[#F85E00] px-16">
         <div className="flex space-x-8 font-[Stolzl] font-medium text-[#FFD29D]">
-          <NavLink to="/search">Search</NavLink>
+          <NavLink to="/">Search</NavLink>
           <NavLink to="/favorites">Favorites</NavLink>
           <NavLink to="/planner">Planner</NavLink>
         </div>

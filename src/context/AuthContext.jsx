@@ -13,16 +13,20 @@ const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
   const [currentUser, setCurrentUser] = useState(null);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-  const unsubscribe = onAuthStateChanged(auth, (user) => setCurrentUser(user))
-  return unsubscribe
-}, [])
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      setCurrentUser(user);
+      setLoading(false);
+    });
+    return unsubscribe;
+  }, []);
 
-  const register = async (email,password) => {
+  const register = async (email, password) => {
     return await createUserWithEmailAndPassword(auth, email, password);
   };
-  const login = async (email,password) => {
+  const login = async (email, password) => {
     return await signInWithEmailAndPassword(auth, email, password);
   };
   const loginWithGoogle = async () => {
@@ -32,9 +36,13 @@ export const AuthProvider = ({ children }) => {
   const logout = async () => {
     return await signOut(auth);
   };
-  return <AuthContext.Provider value={{ currentUser, register, login, loginWithGoogle, logout }}>
-    {children}
-  </AuthContext.Provider>;
+  return (
+    <AuthContext.Provider
+      value={{ currentUser, register, login, loginWithGoogle, logout, loading }}
+    >
+      {children}
+    </AuthContext.Provider>
+  );
 };
 
-export const useAuth = () => useContext(AuthContext)
+export const useAuth = () => useContext(AuthContext);

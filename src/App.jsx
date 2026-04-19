@@ -11,12 +11,14 @@ import Favorites from "./pages/Favorites";
 import MealPlanner from "./pages/MealPlanner";
 import SearchResults from "./pages/SearchResults";
 import { AuthProvider } from "./context/AuthContext";
+import { PlannerProvider } from "./context/MealPlanContext";
 import { ProtectedRoute } from "./components/ProtectedRoute";
 
 function App() {
   return (
     <BrowserRouter>
       <AuthProvider>
+        <PlannerProvider>
         <Routes>
           <Route element={<Layout />}>
             <Route index element={<Home />} />
@@ -32,6 +34,7 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
         </Routes>
+        </PlannerProvider>
       </AuthProvider>
     </BrowserRouter>
   );

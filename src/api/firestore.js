@@ -36,3 +36,14 @@ export async function checkIsFavorite(userId, mealId) {
   const snap = await getDoc(ref);
   return snap.exists();
 }
+
+export async function getMealPlan(userId){
+  const ref = collection(db, "users", userId, "mealPlan")
+  const snapshot = await getDocs(ref)
+  return snapshot.docs.reduce((acc, doc) => ({ ...acc, [doc.id]: doc.data().meals }), {})
+}
+
+export async function saveDayPlan(userId, day, meals){
+  const ref = doc(db, "users", userId, "mealPlan", day)
+  return await setDoc(ref,{meals})
+}
