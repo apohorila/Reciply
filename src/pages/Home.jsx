@@ -48,7 +48,7 @@ export default function Home() {
       <main className="overflow-x-hidden">
         <section className="min-h-screen w-full bg-[#FFD29D] px-4 py-6 md:px-20 md:py-10">
           <div
-            style={{ backgroundImage: "url(src/assets/pics/homeback.jpg)" }}
+            style={{ backgroundImage: "url(homeback.jpg)" }}
             className="relative mx-auto flex h-[75vh] w-full flex-col items-center justify-center space-y-6 rounded-[40px] border-2 border-amber-800 bg-cover bg-center p-6 md:h-[90vh] md:rounded-[60px]"
           >
             <div className="flex flex-col items-center space-y-2 text-center font-[Stolzl] text-white">
@@ -124,7 +124,7 @@ export default function Home() {
               its own heat, spice, and soul to the table.
             </p>
           </div>
-          <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4">
+          <div className="mx-auto grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4">
             {cuisineData.map((cuisine) => {
               return (
                 <CuisineCard
