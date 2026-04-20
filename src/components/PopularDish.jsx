@@ -3,18 +3,17 @@ import { useNavigate } from "react-router";
 export default function PopularDish({ title, img, id }) {
   const navigate = useNavigate();
   return (
-    <div className="h-127.5 w-101.25 rounded-[60px] border-2 border-[#FFD29D] bg-white font-[Stolzl]">
-      <div className="h-58.3 rounded-[60px] border-0">
-        <img
-          src={img}
-          className="h-58.25 w-full rounded-t-[60px] object-cover"
-        />
+    <div className="mx-auto w-full max-w-85 overflow-hidden rounded-[40px] border-2 border-[#FFD29D] bg-white font-[Stolzl] shadow-sm md:rounded-[60px]">
+      <div className="h-64 w-full">
+        <img src={img} className="h-full w-full object-cover" />
       </div>
-      <div className="px-8 pt-13">
-        <p>Quick</p>
-        <h1 className="text-[32px] leading-tight">{title}</h1>
+      <div className="px-6 pt-8 pb-8 md:px-8 md:pt-13">
+        <p className="text-sm text-gray-500">Quick</p>
+        <h1 className="mt-1 truncate text-2xl leading-tight md:text-[32px]">
+          {title}
+        </h1>
         <div
-          className="mt-6 flex cursor-pointer space-x-0.5"
+          className="mt-6 flex cursor-pointer items-center space-x-0.5 text-amber-700"
           onClick={() => navigate(`/recipe/${id}`)}
         >
           <p className="hover:underline">Save</p>
@@ -24,7 +23,7 @@ export default function PopularDish({ title, img, id }) {
             viewBox="0 0 24 24"
             strokeWidth={1.5}
             stroke="currentColor"
-            className="size-6"
+            className="size-5"
           >
             <path
               strokeLinecap="round"

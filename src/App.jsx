@@ -6,7 +6,6 @@ import Home from "./pages/Home";
 import RecipeDtail from "./pages/RecipeDetail";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
-import ShoppingList from "./pages/ShoppingList";
 import Favorites from "./pages/Favorites";
 import MealPlanner from "./pages/MealPlanner";
 import SearchResults from "./pages/SearchResults";
@@ -19,21 +18,20 @@ function App() {
     <BrowserRouter>
       <AuthProvider>
         <PlannerProvider>
-        <Routes>
-          <Route element={<Layout />}>
-            <Route index element={<Home />} />
-            <Route path="/recipe/:id" element={<RecipeDtail />} />
-            <Route element={<ProtectedRoute />}>
-              <Route path="/favorites" element={<Favorites />} />
-              <Route path="/planner" element={<MealPlanner />} />
-              <Route path="/list" element={<ShoppingList />} />
+          <Routes>
+            <Route element={<Layout />}>
+              <Route index element={<Home />} />
+              <Route path="/recipe/:id" element={<RecipeDtail />} />
+              <Route element={<ProtectedRoute />}>
+                <Route path="/favorites" element={<Favorites />} />
+                <Route path="/planner" element={<MealPlanner />} />
+              </Route>
+              <Route path="/search" element={<SearchResults />} />
             </Route>
-            <Route path="/search" element={<SearchResults/>}/>
-          </Route>
-          
-          <Route path="/login" element={<Login />} />
-          <Route path="/register" element={<Register />} />
-        </Routes>
+
+            <Route path="/login" element={<Login />} />
+            <Route path="/register" element={<Register />} />
+          </Routes>
         </PlannerProvider>
       </AuthProvider>
     </BrowserRouter>

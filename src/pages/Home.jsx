@@ -45,30 +45,32 @@ export default function Home() {
 
   return (
     <>
-      <main>
-        <section className="h-screen w-full bg-[#FFD29D] px-20 py-10">
+      <main className="overflow-x-hidden">
+        <section className="min-h-screen w-full bg-[#FFD29D] px-4 py-6 md:px-20 md:py-10">
           <div
             style={{ backgroundImage: "url(src/assets/pics/homeback.jpg)" }}
-            className="relative mx-auto flex h-9/10 flex-col items-center justify-center space-y-2 rounded-4xl border-2 border-amber-800 bg-cover bg-center"
+            className="relative mx-auto flex h-[75vh] w-full flex-col items-center justify-center space-y-6 rounded-[40px] border-2 border-amber-800 bg-cover bg-center p-6 md:h-[90vh] md:rounded-[60px]"
           >
-            <div className="flex-col items-center font-[Stolzl] text-[white]">
-              <h1 className="text-center text-4xl">
+            <div className="flex flex-col items-center space-y-2 text-center font-[Stolzl] text-white">
+              <h1 className="text-3xl md:text-5xl lg:text-6xl">
                 Find your next <br /> favorite meal
               </h1>
-              <h2>Search by ingredient, cuisine, or dish name</h2>
+              <h2 className="text-sm md:text-lg">
+                Search by ingredient, cuisine, or dish name
+              </h2>
             </div>
-            <div className="flex w-full justify-center space-x-4 font-[Stolzl]">
+            <div className="flex w-full max-w-2xl flex-col justify-center gap-4 font-[Stolzl] md:flex-row">
               <input
                 type="text"
                 placeholder="Enter ingredients separated by commas (e.g. chicken, garlic, salt)"
-                className="text[#F85E00] w-2xl rounded-4xl border border-amber-700 bg-[#FFD29D] px-5 py-2"
+                className="w-full rounded-4xl border border-amber-700 bg-[#FFD29D] px-6 py-3 text-sm placeholder-amber-900/50 md:text-base"
                 value={inputResult}
                 onChange={(e) => {
                   setInputResult(e.target.value);
                 }}
               />
               <button
-                className="cursor-pointer rounded-4xl bg-[#F85E00] px-3 text-amber-50"
+                className="cursor-pointer rounded-4xl bg-[#F85E00] px-8 py-3 whitespace-nowrap text-amber-50 transition hover:bg-[#d65200]"
                 onClick={() => {
                   const formattedIngredients = inputResult
                     .split(",")
@@ -79,7 +81,7 @@ export default function Home() {
                   navigate("/search", {
                     state: { ingredients: formattedIngredients },
                   });
-                  setInputResult("")
+                  setInputResult("");
                 }}
               >
                 Search
@@ -87,13 +89,15 @@ export default function Home() {
             </div>
           </div>
         </section>
-        <section className="flex-col justify-between space-y-20 bg-amber-700 px-20 py-28">
-          <div className="flex-col space-y-4 text-center font-[Stolzl] text-[#FFB563]">
+        <section className="flex flex-col bg-amber-700 px-6 py-16 md:px-20 md:py-28">
+          <div className="mb-10 flex flex-col space-y-4 text-center font-[Stolzl] text-[#FFB563]">
             <p>Popular</p>
-            <h1 className="text-5xl">What's cooking right now</h1>
-            <p className="text-lg">See what others are making this week</p>
+            <h1 className="text-3xl md:text-5xl">What's cooking right now</h1>
+            <p className="text-sm md:text-lg">
+              See what others are making this week
+            </p>
           </div>
-          <div className="flex justify-between">
+          <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
             {popularRecipes &&
               popularRecipes.meals
                 .slice(recipeIndex, recipeIndex + 3)
@@ -109,16 +113,18 @@ export default function Home() {
                 })}
           </div>
         </section>
-        <section className="flex-col space-y-20 bg-[#FFD29D] px-28 py-20 font-[Stolzl] text-amber-900">
-          <div className="flex-col space-y-4 text-center">
+        <section className="flex flex-col bg-[#FFD29D] px-6 py-16 font-[Stolzl] text-amber-900 md:px-28 md:py-20">
+          <div className="mb-12 flex flex-col space-y-4 text-center">
             <p>Explore</p>
-            <h1 className="text-5xl">Cook by the world's flavors</h1>
-            <p>
+            <h1 className="text-3xl md:text-5xl">
+              Cook by the world's flavors
+            </h1>
+            <p className="mx-auto max-w-2xl text-sm md:text-base">
               Pick a cuisine and find your next favorite dish. Each style brings
               its own heat, spice, and soul to the table.
             </p>
           </div>
-          <div className="flex justify-between">
+          <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4">
             {cuisineData.map((cuisine) => {
               return (
                 <CuisineCard

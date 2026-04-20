@@ -31,9 +31,14 @@ export default function FavoriteButton({ userId, meal }) {
     }
   };
   return (
-    <button className="cursor-pointer" onClick={handleClick}>
+    <button
+      className="cursor-pointer transition-transform duration-200 hover:scale-110 focus:outline-none"
+      onClick={handleClick}
+      aria-label={isFavorite ? "Remove from favorites" : "Add to favorites"}
+    >
       {isFavorite ? (
         <svg
+          className="size-8 fill-[#F85E00] transition-colors md:size-10"
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 16 16"
           width="40"
@@ -45,6 +50,7 @@ export default function FavoriteButton({ userId, meal }) {
         </svg>
       ) : (
         <svg
+        className="size-8 md:size-10 stroke-white transition-colors"
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 24 24"
           width="40"
