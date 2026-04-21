@@ -124,10 +124,11 @@ export default function Home() {
               its own heat, spice, and soul to the table.
             </p>
           </div>
-          <div className="mx-auto grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4">
+          <div className="mx-auto grid max-w-7xl grid-cols-1 gap-6 px-4 md:grid-cols-2 lg:grid-cols-3">
             {cuisineData.map((cuisine) => {
               return (
                 <CuisineCard
+                  key={cuisine.title}
                   title={cuisine.title}
                   img={cuisine.img}
                   description={cuisine.description}
