@@ -67,10 +67,8 @@ export default function MealPlanner() {
       {selectedDay && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50">
           {" "}
-          // backdrop — full screen dark overlay
           <div className="overflow- max-h-[80vh] w-full max-w-md rounded-3xl bg-white p-6">
             {" "}
-            // modal card
             <h2>Add to {selectedDay}</h2>
             <button onClick={() => setSelectedDay(null)}>✕</button>
             {favorites.map((meal) => (
